@@ -450,10 +450,6 @@ export default function Home() {
                   <span>Média de liberação</span>
                 </li>
               </ul>
-              <figure className={styles.heroFigure}>
-                <img src="https://i.ibb.co/ksqFfYt9/credito-top.jpg" alt="Marca Creditop - Empréstimo Sofisticado" />
-                <figcaption>Escudo Creditop • Confiança & Crescimento</figcaption>
-              </figure>
             </div>
 
             <aside className={styles.heroRight}>

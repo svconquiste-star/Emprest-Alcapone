@@ -7,7 +7,7 @@ Landing page de atendimento via WhatsApp, configurada para deploy em Coolify com
 - **Framework**: Next.js 14 (App Router, JavaScript)
 - **Deployment**: Coolify + Traefik
 - **Meta Pixel**: `1494594679053438` (Core Config compliance)
-- **WhatsApp**: `553799963270`
+- **WhatsApp**: `5531975033836`
 
 ## Instalação Local
 

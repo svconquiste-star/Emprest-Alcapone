@@ -63,6 +63,48 @@ export default function Page() {
       email: email.trim() || undefined,
       cidade: cidade.trim(),
     });
+
+    saveContactAsync({
+      nome: nome.trim(),
+      telefone: phoneDigits,
+      email: email.trim(),
+      cidade: cidade.trim(),
+      whatsappLink: link,
+      ...getDeviceInfo(),
+    });
+  };
+
+  const getDeviceInfo = () => {
+    if (typeof navigator === 'undefined') return {};
+    const ua = navigator.userAgent || '';
+    let operatingSystem = 'Outro';
+    if (/android/i.test(ua)) operatingSystem = 'Android';
+    else if (/iphone|ipad|ipod/i.test(ua)) operatingSystem = 'iOS';
+    else if (/windows/i.test(ua)) operatingSystem = 'Windows';
+    else if (/mac os/i.test(ua)) operatingSystem = 'macOS';
+    else if (/linux/i.test(ua)) operatingSystem = 'Linux';
+    let deviceType = 'Desktop';
+    if (/ipad|tablet/i.test(ua)) deviceType = 'Tablet';
+    else if (/mobi|android|iphone/i.test(ua)) deviceType = 'Mobile';
+    return { deviceType, operatingSystem };
+  };
+
+  // Salva o lead em segundo plano; falhas nunca afetam o usuário.
+  const saveContactAsync = (data) => {
+    try {
+      fetch('/api/save-contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+        keepalive: true,
+      })
+        .then((response) => {
+          if (!response.ok) console.warn('Erro ao salvar contato:', response.status);
+        })
+        .catch((error) => console.warn('Erro ao conectar com servidor:', error));
+    } catch (error) {
+      console.warn('Erro ao salvar contato:', error);
+    }
   };
 
   return (
